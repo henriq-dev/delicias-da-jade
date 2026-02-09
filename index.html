@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delícias da Jade | Bolos Artesanais</title>
+  <style>
+    :root{
+      --marrom:#5a2d0c;
+      --chocolate:#8b4513;
+      --bege:#f6efe8;
+      --branco:#ffffff;
+      --verde:#25d366;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;}
+    body{background:var(--bege);color:#333;}
+    header{
+      background:linear-gradient(135deg,var(--marrom),var(--chocolate));
+      color:white;
+      padding:40px 20px;
+      text-align:center;
+    }
+    header h1{font-size:2.5rem;margin-bottom:10px;}
+    header p{font-size:1.1rem;}
+    nav{
+      background:#3e1f08;
+      padding:10px;
+      text-align:center;
+    }
+    nav a{
+      color:white;
+      margin:0 12px;
+      text-decoration:none;
+      font-weight:bold;
+    }
+    nav a:hover{text-decoration:underline;}
+    section{padding:40px 20px;max-width:1100px;margin:auto;}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+    .card{
+      background:white;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      overflow:hidden;
+    }
+    .card img{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+    }
+    .card .content{padding:15px;}
+    .card h3{color:var(--marrom);margin-bottom:8px;}
+    .price{font-weight:bold;color:var(--chocolate);}
+    .cta{
+      display:inline-block;
+      margin-top:10px;
+      padding:10px 15px;
+      background:var(--verde);
+      color:white;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+    }
+    .cta:hover{opacity:0.9;}
+    footer{
+      background:#2a1406;
+      color:white;
+      text-align:center;
+      padding:25px 10px;
+      margin-top:40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Delícias da Jade</h1>
+  <p>Bolos artesanais feitos com carinho 🍰</p>
+</header>
+
+<nav>
+  <a href="#produtos">Produtos</a>
+  <a href="#cardapio">Cardápio</a>
+  <a href="#contato">Contato</a>
+</nav>
+
+<section id="produtos">
+  <h2>Alguns dos nossos bolos</h2>
+  <br />
+  <div class="grid">
+    <div class="card">
+      <img src="imagens/bolo1.jpeg" alt="Bolo de chocolate" />
+      <div class="content">
+        <h3>Bolo Vulcão de Chocolate</h3>
+        <p>Cobertura cremosa de chocolate.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="imagens/bolo2.jpeg" alt="Bolo de cenoura" />
+      <div class="content">
+        <h3>Bolo Vulcão de Cenoura</h3>
+        <p>Clássico com muito recheio.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="imagens/bolo3.jpeg" alt="Bolo ninho" />
+      <div class="content">
+        <h3>Bolo de Ninho</h3>
+        <p>Suave e irresistível.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cardapio">
+  <h2>Cardápio</h2>
+  <br />
+  <h3>Mini Bolos Vulcão</h3>
+  <p><strong>Massas:</strong> Chocolate 🍫 | Cenoura 🥕 | Massa Branca 🤍</p>
+  <ul>
+    <li>Brigadeiro tradicional — <span class="price">R$15,00</span></li>
+    <li>Brigadeiro com Ninho — <span class="price">R$15,00</span></li>
+    <li>Sensação (brigadeiro + morango) — <span class="price">R$18,00</span></li>
+    <li>Ninho tradicional — <span class="price">R$15,00</span></li>
+    <li>Ninho com Óreo — <span class="price">R$15,00</span></li>
+    <li>Ninho com Nutella — <span class="price">R$18,00</span></li>
+  </ul>
+
+  <br />
+  <h3>Bolos Tradicionais</h3>
+  <ul>
+    <li>Brigadeiro tradicional — <span class="price">R$36,00</span></li>
+    <li>Brigadeiro com Ninho — <span class="price">R$45,00</span></li>
+    <li>Ninho tradicional — <span class="price">R$40,00</span></li>
+    <li>Maracujá — <span class="price">R$42,00</span></li>
+  </ul>
+</section>
+
+<section id="contato">
+  <h2>Faça seu pedido</h2>
+  <p>Entre em contato diretamente pelo WhatsApp ou Instagram.</p>
+  <br />
+  <a class="cta" href="https://wa.me/5569993589649" target="_blank">📲 Pedir pelo WhatsApp</a>
+  <br /><br />
+  <a class="cta" style="background:#c13584" href="https://www.instagram.com/delicias_da_jade_/" target="_blank">📸 Instagram</a>
+</section>
+
+<footer>
+  <p>© 2026 Delícias da Jade — Bolos feitos com amor ❤️</p>
+</footer>
+
+</body>
+</html>
