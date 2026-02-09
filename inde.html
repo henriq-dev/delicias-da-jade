@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delícias da Jade - Bolos Artesanais</title>
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #c8a2d0;
+            --dark-purple: #8b5a9e;
+            --light-purple: #e8d5ed;
+            --accent-pink: #f4c2d6;
+            --dark-text: #2d1b3d;
+            --light-bg: #fdfbfe;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-text);
+            background: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle cx="200" cy="150" r="100" fill="%23ffffff" opacity="0.03"/><circle cx="900" cy="600" r="150" fill="%23ffffff" opacity="0.03"/><circle cx="1100" cy="200" r="80" fill="%23ffffff" opacity="0.03"/><circle cx="100" cy="650" r="120" fill="%23ffffff" opacity="0.03"/></svg>');
+            background-size: cover;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            animation: scaleIn 0.8s ease-out;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--light-purple);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--dark-purple);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 6rem 2rem;
+            background: var(--white);
+            position: relative;
+        }
+
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--white);
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--dark-purple);
+            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--dark-text);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            opacity: 0.8;
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .menu-card {
+            background: linear-gradient(135deg, var(--light-purple) 0%, var(--white) 100%);
+            border-radius: 30px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(139, 90, 158, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(139, 90, 158, 0.25);
+        }
+
+        .menu-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--dark-purple);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .cake-types {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .cake-type {
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--dark-purple);
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(139, 90, 158, 0.1);
+        }
+
+        .flavor-list {
+            list-style: none;
+        }
+
+        .flavor-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            background: var(--white);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flavor-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--dark-purple);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .flavor-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(139, 90, 158, 0.15);
+        }
+
+        .flavor-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .flavor-name {
+            font-weight: 500;
+            color: var(--dark-text);
+        }
+
+        .flavor-price {
+            font-weight: 700;
+            color: var(--dark-purple);
+            font-size: 1.2rem;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--light-bg) 0%, var(--light-purple) 100%);
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            box-shadow: 0 10px 40px rgba(139, 90, 158, 0.2);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 60px rgba(139, 90, 158, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(139, 90, 158, 0.8) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-caption {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 2rem;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .contact-info {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            flex: 1;
+            min-width: 250px;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
+            border-radius: 25px;
+            color: var(--white);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(139, 90, 158, 0.4);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-purple);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="logo.png" class="logo">
+            <h1>Delícias da Jade</h1>
+            <p>Bolos artesanais feitos com amor e dedicação</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/5569993589649" class="btn btn-primary" target="_blank">
+                    <span>📱 Peça pelo WhatsApp</span>
+                </a>
+                <a href="https://www.instagram.com/delicias_da_jade_/" class="btn btn-secondary" target="_blank">
+                    <span>📸 Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <h2 class="section-title fade-in">Nosso Cardápio</h2>
+        <p class="section-subtitle fade-in">Escolha entre nossos deliciosos sabores</p>
+        
+        <div class="menu-container">
+            <!-- Mini Bolo Vulcões -->
+            <div class="menu-card fade-in">
+                <h3>🌋 Mini Bolo Vulcões</h3>
+                <div class="cake-types">
+                    <span class="cake-type">🍫 Chocolate</span>
+                    <span class="cake-type">🥕 Cenoura</span>
+                    <span class="cake-type">🤍 Massa Branca</span>
+                </div>
+                <ul class="flavor-list">
+                    <li class="flavor-item">
+                        <span class="flavor-name">Brigadeiro tradicional</span>
+                        <span class="flavor-price">R$ 15,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Brigadeiro c/ Ninho</span>
+                        <span class="flavor-price">R$ 15,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Brigadeiro c/ Geleia de morango</span>
+                        <span class="flavor-price">R$ 18,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Ninho tradicional</span>
+                        <span class="flavor-price">R$ 15,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Ninho c/ Oreo</span>
+                        <span class="flavor-price">R$ 15,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Ninho c/ Nutella</span>
+                        <span class="flavor-price">R$ 18,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Ninho c/ Geleia de morango</span>
+                        <span class="flavor-price">R$ 18,00</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Bolo Tradicional -->
+            <div class="menu-card fade-in">
+                <h3>🎂 Bolo Tradicional</h3>
+                <div class="cake-types">
+                    <span class="cake-type">🍫 Chocolate</span>
+                    <span class="cake-type">🥕 Cenoura</span>
+                    <span class="cake-type">🤍 Massa Branca</span>
+                </div>
+                <ul class="flavor-list">
+                    <li class="flavor-item">
+                        <span class="flavor-name">Brigadeiro tradicional</span>
+                        <span class="flavor-price">R$ 36,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Brigadeiro c/ Ninho</span>
+                        <span class="flavor-price">R$ 45,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Ninho tradicional</span>
+                        <span class="flavor-price">R$ 40,00</span>
+                    </li>
+                    <li class="flavor-item">
+                        <span class="flavor-name">Maracujá</span>
+                        <span class="flavor-price">R$ 42,00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2 class="section-title fade-in">Galeria de Sabores</h2>
+        <p class="section-subtitle fade-in">Veja nossos bolos irresistíveis</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <img src="/imagens/bolo1.jpeg" alt="Bolo de chocolate com granulado">
+                <div class="gallery-overlay">
+                    <span class="gallery-caption">Bolo de Chocolate Premium</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="/imagens/bolo2.jpeg" alt="Mini bolo vulcão de cenoura">
+                <div class="gallery-overlay">
+                    <span class="gallery-caption">Mini Vulcão de Cenoura</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="imagens/bolo3.jpeg" alt="Bolo com cobertura de Oreo">
+                <div class="gallery-overlay">
+                    <span class="gallery-caption">Ninho com Oreo</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="imagens/bolo4.jpeg" alt="Mini bolo branco">
+                <div class="gallery-overlay">
+                    <span class="gallery-caption">Delicadeza em Branco</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="imagens/bolo5.jpeg" alt="Mini bolo meio a meio">
+                <div class="gallery-overlay">
+                    <span class="gallery-caption">Combinação Perfeita</span>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="imagens/bolo6.jpeg" alt="Bolo com morangos">
+                <div class="gallery-overlay">
+                    <span class="gallery-caption">Sensação de Morango</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2 class="section-title fade-in">Faça seu Pedido</h2>
+        <p class="section-subtitle fade-in">Entre em contato conosco</p>
+        
+        <div class="contact-info">
+            <a href="https://wa.me/5569993589649" class="contact-card fade-in" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="contact-icon">📱</div>
+                <h3>WhatsApp</h3>
+                <p>Faça seu pedido agora</p>
+                <p style="margin-top: 0.5rem; font-weight: 600;">(69) 99358-9649</p>
+            </a>
+            
+            <a href="https://www.instagram.com/delicias_da_jade_/" class="contact-card fade-in" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="contact-icon">📸</div>
+                <h3>Instagram</h3>
+                <p>Siga-nos para novidades</p>
+                <p style="margin-top: 0.5rem; font-weight: 600;">@delicias_da_jade_</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Delícias da Jade - Todos os direitos reservados</p>
+        <p style="margin-top: 0.5rem;">Feito com 💜 e muito carinho</p>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
