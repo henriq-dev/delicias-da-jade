@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <link rel="shortcut icon" href="logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -56,8 +59,15 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.05); }
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-20px) scale(1.05);
+            }
         }
 
         .hero-content {
@@ -74,6 +84,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -85,7 +96,7 @@
             height: 180px;
             margin: 0 auto 2rem;
             animation: scaleIn 0.8s ease-out;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
         }
 
         @keyframes scaleIn {
@@ -93,6 +104,7 @@
                 transform: scale(0.8);
                 opacity: 0;
             }
+
             to {
                 transform: scale(1);
                 opacity: 1;
@@ -105,7 +117,7 @@
             font-weight: 900;
             color: var(--white);
             margin-bottom: 1rem;
-            text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
             letter-spacing: -1px;
         }
 
@@ -147,7 +159,7 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.3);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
@@ -165,12 +177,12 @@
         .btn-primary {
             background: var(--white);
             color: var(--dark-purple);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .btn-secondary {
@@ -180,7 +192,7 @@
         }
 
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-3px);
         }
 
@@ -245,7 +257,7 @@
             right: -50%;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
             border-radius: 50%;
         }
 
@@ -500,6 +512,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Hero Section -->
     <section class="hero">
@@ -522,7 +535,7 @@
     <section class="menu-section">
         <h2 class="section-title fade-in">Nosso Cardápio</h2>
         <p class="section-subtitle fade-in">Escolha entre nossos deliciosos sabores</p>
-        
+
         <div class="menu-container">
             <!-- Mini Bolo Vulcões -->
             <div class="menu-card fade-in">
@@ -598,7 +611,7 @@
     <section class="gallery-section">
         <h2 class="section-title fade-in">Galeria de Sabores</h2>
         <p class="section-subtitle fade-in">Veja nossos bolos irresistíveis</p>
-        
+
         <div class="gallery-grid">
             <div class="gallery-item fade-in">
                 <img src="/imagens/bolo1.jpeg" alt="Bolo de chocolate com granulado">
@@ -643,16 +656,18 @@
     <section class="contact-section">
         <h2 class="section-title fade-in">Faça seu Pedido</h2>
         <p class="section-subtitle fade-in">Entre em contato conosco</p>
-        
+
         <div class="contact-info">
-            <a href="https://wa.me/5569993589649" class="contact-card fade-in" target="_blank" style="text-decoration: none; color: inherit;">
+            <a href="https://wa.me/5569993589649" class="contact-card fade-in" target="_blank"
+                style="text-decoration: none; color: inherit;">
                 <div class="contact-icon">📱</div>
                 <h3>WhatsApp</h3>
                 <p>Faça seu pedido agora</p>
                 <p style="margin-top: 0.5rem; font-weight: 600;">(69) 99358-9649</p>
             </a>
-            
-            <a href="https://www.instagram.com/delicias_da_jade_/" class="contact-card fade-in" target="_blank" style="text-decoration: none; color: inherit;">
+
+            <a href="https://www.instagram.com/delicias_da_jade_/" class="contact-card fade-in" target="_blank"
+                style="text-decoration: none; color: inherit;">
                 <div class="contact-icon">📸</div>
                 <h3>Instagram</h3>
                 <p>Siga-nos para novidades</p>
@@ -699,4 +714,5 @@
         });
     </script>
 </body>
+
 </html>
