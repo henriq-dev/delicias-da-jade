@@ -430,6 +430,7 @@
 
         /* Footer */
         footer {
+            box-shadow : inset -311px 2px 89px 4px rgba(0, 0, 0, 0.633);
             background: var(--dark-purple);
             color: var(--white);
             padding: 2rem;
@@ -486,4 +487,22 @@
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        footer a {
+            padding: 1px 5px 1px 5px;
+            border-radius: 2.9px;
+            background-color: rgba(0, 0, 0, 0.952);
+            color: rgb(127, 175, 233);
+            text-decoration: none;
+            transition: 0.7s;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
+        footer a:hover {
+            color: rgb(203, 224, 10);
+            text-decoration: underline;
+            background-color: rgb(0, 0, 255);
+
         }
