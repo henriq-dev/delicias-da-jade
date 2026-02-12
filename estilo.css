@@ -458,8 +458,7 @@
             box-shadow : inset -311px 2px 89px 4px rgba(0, 0, 0, 0.633);
             background: var(--dark-purple);
             color: var(--white);
-            padding: 2rem;
-            text-align: center;
+            text-align: center;padding: 0.7px;
         }
 
         footer p {
