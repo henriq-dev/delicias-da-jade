@@ -327,13 +327,13 @@
         }
          /* sombra */
          .sombra {
-                box-shadow: inset 1px 1px 12px 11px #17134b5b;
+                box-shadow: inset 1px 1px 12px 11px #7a75c06e;
          }
 
         /* Botoes de baixar  */
 
         .bax1, .bax2 {
-    background-color: #5f5a9e;
+    box-shadow: inset 1px 15px 64px 0px #7a75c06e
     padding: 12px;
     width: 200px;
     height: 63px; /* corrigido */
@@ -551,5 +551,3 @@
             background-color: rgb(0, 0, 255);
 
         }
-
-        
