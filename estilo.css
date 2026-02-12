@@ -325,27 +325,7 @@
             color: var(--dark-purple);
             font-size: 1.2rem;
         }
-         /* sombra */
-         .sombra {
-                box-shadow: inset 1px 1px 12px 11px #7a75c06e;
-         }
-
-        /* Botoes de baixar  */
-
-        .bax1, .bax2 {
-    box-shadow: inset 1px 15px 64px 0px #7a75c06e
-    padding: 12px;
-    width: 200px;
-    height: 63px; /* corrigido */
-    
-    display: flex;
-    justify-content: center;  /* centraliza horizontal */
-    align-items: center;      /* centraliza vertical */
-    
-    margin: 0 auto; /* centraliza a div na página */
-    border-radius: 8px;
-}
-
+         
 /* Estilo do botão */
 .btn {
     text-decoration: none;
