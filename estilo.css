@@ -460,6 +460,7 @@
             color: var(--white);
             padding: 2rem;
             text-align: center;
+            padding: 100px;
         }
 
         footer p {
