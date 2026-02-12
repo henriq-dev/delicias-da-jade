@@ -327,10 +327,8 @@
         }
          /* sombra */
          .sombra {
-                box-shadow: inset 1px 1px 12px 11px #c4c1f359;
+                box-shadow: inset 1px 1px 12px 11px #17134b5b;
          }
-
-
 
         /* Botoes de baixar  */
 
@@ -360,7 +358,7 @@
 }
 
 .btn:hover {
-    background-color: #8b5a9e;
+    background-color: #703986;
     color: gold;
 }
 
