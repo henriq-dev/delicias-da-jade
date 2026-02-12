@@ -209,6 +209,15 @@
             opacity: 0.8;
         }
 
+.baixar {
+    background-color: #2d1b3d;
+    width: 30%;
+    height: 80%;
+    padding: 40px;
+    margin: 10px;
+    display: flex;
+}
+
         .menu-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -316,6 +325,37 @@
             color: var(--dark-purple);
             font-size: 1.2rem;
         }
+
+        /* Botoes de baixar  */
+
+        .bax1, .bax2 {
+    background-color: #5f5a9e;
+    padding: 12px;
+    width: 200px;
+    height: 59px; /* corrigido */
+    
+    display: flex;
+    justify-content: center;  /* centraliza horizontal */
+    align-items: center;      /* centraliza vertical */
+    
+    margin: 0 auto; /* centraliza a div na página */
+    border-radius: 8px;
+}
+
+/* Estilo do botão */
+.btn {
+    text-decoration: none;
+    background-color: white;
+    color: #8b5a9e;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #e6e6e6;
+}
 
         /* Gallery Section */
         .gallery-section {
@@ -506,3 +546,5 @@
             background-color: rgb(0, 0, 255);
 
         }
+
+        
