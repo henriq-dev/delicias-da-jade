@@ -325,6 +325,12 @@
             color: var(--dark-purple);
             font-size: 1.2rem;
         }
+         /* sombra */
+         .sombra {
+                box-shadow: inset 1px 1px 12px 11px #c4c1f359;
+         }
+
+
 
         /* Botoes de baixar  */
 
@@ -332,7 +338,7 @@
     background-color: #5f5a9e;
     padding: 12px;
     width: 200px;
-    height: 59px; /* corrigido */
+    height: 63px; /* corrigido */
     
     display: flex;
     justify-content: center;  /* centraliza horizontal */
@@ -345,7 +351,7 @@
 /* Estilo do botão */
 .btn {
     text-decoration: none;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     color: #8b5a9e;
     padding: 8px 16px;
     border-radius: 6px;
@@ -354,7 +360,8 @@
 }
 
 .btn:hover {
-    background-color: #e6e6e6;
+    background-color: #8b5a9e;
+    color: gold;
 }
 
         /* Gallery Section */
