@@ -3,47 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delícias da Jade Bolos Artesanais </title>
+    <meta name="description" content="Delícias da Jade - Bolos artesanais feitos com amor e dedicação. Mini bolos vulcão e bolos tradicionais com diversos sabores. Entrega em Porto Velho, RO.">
+    <meta name="keywords" content="bolos artesanais, bolos Porto Velho, mini bolo vulcão, bolo caseiro, brigadeiro, ninho, bolos RO">
+    <meta name="author" content="Delícias da Jade">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deliciasdajade.com.br/">
+    <meta property="og:title" content="Delícias da Jade - Bolos Artesanais">
+    <meta property="og:description" content="Bolos artesanais feitos com amor e dedicação 💜">
+    <meta property="og:image" content="https://deliciasdajade.com.br/logo.png">
 
-    <!-- favicon -->
-     <link rel="shortcut icon" href="favicon/logo.png" type="image/x-icon">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://deliciasdajade.com.br/">
+    <meta property="twitter:title" content="Delícias da Jade - Bolos Artesanais">
+    <meta property="twitter:description" content="Bolos artesanais feitos com amor e dedicação 💜">
+    <meta property="twitter:image" content="https://deliciasdajade.com.br/logo.png">
 
+    <title>Delícias da Jade - Bolos Artesanais | Porto Velho, RO</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon/logo.png" type="image/x-icon">
+
+    <!-- Preconnect para melhor performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload de fontes críticas -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="estilo.css">
+
+    <!-- Schema Markup para Negócio Local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Bakery",
+      "name": "Delícias da Jade",
+      "description": "Bolos artesanais feitos com amor e dedicação",
+      "image": "https://deliciasdajade.com.br/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Porto Velho",
+        "addressRegion": "RO",
+        "addressCountry": "BR"
+      },
+      "telephone": "+5569992295106",
+      "priceRange": "R$15-R$45",
+      "servesCuisine": "Confeitaria",
+      "menu": "https://deliciasdajade.com.br/#cardapio",
+      "sameAs": [
+        "https://www.instagram.com/delicias_da_jade_"
+      ]
+    }
+    </script>
 </head>
 <body>
 
+<!-- ── MENU DE NAVEGAÇÃO FIXO ── -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Menu principal">
+    <div class="navbar-container">
+        <a href="#" class="navbar-logo" aria-label="Voltar ao início">
+            <img src="favicon/logo.png" alt="Logo Delícias da Jade" width="40" height="40">
+            <span>Delícias da Jade</span>
+        </a>
+        <ul class="navbar-menu">
+            <li><a href="#cardapio" aria-label="Ver cardápio">Cardápio</a></li>
+            <li><a href="#galeria" aria-label="Ver galeria de fotos">Galeria</a></li>
+            <li><a href="#pedido" aria-label="Fazer pedido">Pedido</a></li>
+            <li><a href="#contato" aria-label="Informações de contato">Contato</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── BOTÃO VOLTAR AO TOPO ── -->
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo da página">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+</button>
+
 <!-- ── HERO ── -->
-<section class="hero">
+<section class="hero" role="banner">
     <div class="hero-content">
-        <img src="logo.png" alt="Delícias da Jade" class="logo">
+        <img src="favicon/logo.png" alt="Logo Delícias da Jade - Bolos Artesanais" class="logo" width="180" height="180">
         <h1>Delícias da Jade</h1>
         <p>Bolos artesanais feitos com amor e dedicação 💜</p>
         <div class="cta-buttons">
-            <a href="#pedido" class="btn btn-primary"><span>🍰 Monte seu pedido</span></a>
-            <a href="https://www.instagram.com/delicias_da_jade_?igsh=djJ4a3o1aXYzZjVv" class="btn btn-secondary" target="_blank"><span>📸 As novidades no Instagram</span></a>
+            <a href="#pedido" class="btn btn-primary" aria-label="Monte seu pedido de bolo"><span>🍰 Monte seu pedido</span></a>
+            <a href="https://www.instagram.com/delicias_da_jade_?igsh=djJ4a3o1aXYzZjVv" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="Visite nosso Instagram"><span>📸 As novidades no Instagram</span></a>
         </div>
     </div>
 </section>
 
 <!-- ── CARDÁPIO ── -->
-<section class="menu-section">
-    <h2 class="section-title fade-in">Nosso Cardápio</h2>
+<section class="menu-section" id="cardapio" aria-labelledby="cardapio-title">
+    <h2 class="section-title fade-in" id="cardapio-title">Nosso Cardápio</h2>
     <p class="section-subtitle fade-in">Escolha entre nossos deliciosos sabores</p>
 
     <div class="menu-container">
 
         <!-- Mini Bolo Vulcões -->
-        <div class="menu-card fade-in">
+        <article class="menu-card fade-in">
             <h3>🌋 Mini Bolo Vulcões</h3>
-            <div class="cake-types">
-                <span class="cake-type">🍫 Chocolate</span>
-                <span class="cake-type">🥕 Cenoura</span>
-                <span class="cake-type">🤍 Massa Branca</span>
+            <div class="cake-types" role="list" aria-label="Tipos de massa disponíveis">
+                <span class="cake-type" role="listitem">🍫 Chocolate</span>
+                <span class="cake-type" role="listitem">🥕 Cenoura</span>
+                <span class="cake-type" role="listitem">🤍 Massa Branca</span>
             </div>
-            <ul class="flavor-list">
+            <ul class="flavor-list" aria-label="Sabores e preços de mini bolos">
                 <li class="flavor-item">
                     <span class="flavor-name">Brigadeiro tradicional</span>
                     <span class="flavor-price">R$ 15,00</span>
@@ -73,17 +143,17 @@
                     <span class="flavor-price">R$ 18,00</span>
                 </li>
             </ul>
-        </div>
+        </article>
 
         <!-- Bolo Tradicional -->
-        <div class="menu-card fade-in">
+        <article class="menu-card fade-in">
             <h3>🎂 Bolo Tradicional</h3>
-            <div class="cake-types">
-                <span class="cake-type">🍫 Chocolate</span>
-                <span class="cake-type">🥕 Cenoura</span>
-                <span class="cake-type">🤍 Massa Branca</span>
+            <div class="cake-types" role="list" aria-label="Tipos de massa disponíveis">
+                <span class="cake-type" role="listitem">🍫 Chocolate</span>
+                <span class="cake-type" role="listitem">🥕 Cenoura</span>
+                <span class="cake-type" role="listitem">🤍 Massa Branca</span>
             </div>
-            <ul class="flavor-list">
+            <ul class="flavor-list" aria-label="Sabores e preços de bolos tradicionais">
                 <li class="flavor-item">
                     <span class="flavor-name">Brigadeiro tradicional</span>
                     <span class="flavor-price">R$ 36,00</span>
@@ -101,109 +171,140 @@
                     <span class="flavor-price">R$ 42,00</span>
                 </li>
             </ul>
-        </div>
+        </article>
 
     </div>
 </section>
 
 <!-- ── GALERIA ── -->
-<section class="gallery-section">
-    <h2 class="section-title fade-in">Galeria de Sabores</h2>
+<section class="gallery-section" id="galeria" aria-labelledby="galeria-title">
+    <h2 class="section-title fade-in" id="galeria-title">Galeria de Sabores</h2>
     <p class="section-subtitle fade-in">Veja nossos bolos irresistíveis</p>
 
     <div class="gallery-grid">
-        <div class="gallery-item fade-in">
-            <img src="imagens/bolo1-Brigadeiro-tradicional.jpeg" alt="Brigadeiro Tradicional">
+        <div class="gallery-item fade-in" role="button" tabindex="0" aria-label="Ver imagem ampliada de Brigadeiro Tradicional" data-image="imagens/bolo1-Brigadeiro-tradicional.jpeg">
+            <img src="imagens/bolo1-Brigadeiro-tradicional.jpeg" alt="Bolo de brigadeiro tradicional com cobertura cremosa" loading="lazy" width="280" height="280">
             <div class="gallery-overlay"><span class="gallery-caption">Brigadeiro Tradicional</span></div>
         </div>
-        <div class="gallery-item fade-in">
-            <img src="imagens/bolo2-CenouracBrigadeiro.jpeg" alt="Cenoura C/ Brigadeiro">
+        <div class="gallery-item fade-in" role="button" tabindex="0" aria-label="Ver imagem ampliada de Cenoura com Brigadeiro" data-image="imagens/bolo2-CenouracBrigadeiro.jpeg">
+            <img src="imagens/bolo2-CenouracBrigadeiro.jpeg" alt="Bolo de cenoura com cobertura de brigadeiro" loading="lazy" width="280" height="280">
             <div class="gallery-overlay"><span class="gallery-caption">Cenoura C/ Brigadeiro</span></div>
         </div>
-        <div class="gallery-item fade-in">
-            <img src="imagens/bolo3-Ninhocoreo.jpeg" alt="Ninho com Oreo">
+        <div class="gallery-item fade-in" role="button" tabindex="0" aria-label="Ver imagem ampliada de Ninho com Oreo" data-image="imagens/bolo3-Ninhocoreo.jpeg">
+            <img src="imagens/bolo3-Ninhocoreo.jpeg" alt="Mini bolo de ninho com pedaços de Oreo" loading="lazy" width="280" height="280">
             <div class="gallery-overlay"><span class="gallery-caption">Ninho com Oreo</span></div>
         </div>
-        <div class="gallery-item fade-in">
-            <img src="imagens/bolo4-NinhocNutella.jpeg" alt="Mini bolo ninho com nutella">
+        <div class="gallery-item fade-in" role="button" tabindex="0" aria-label="Ver imagem ampliada de Ninho com Nutella" data-image="imagens/bolo4-NinhocNutella.jpeg">
+            <img src="imagens/bolo4-NinhocNutella.jpeg" alt="Mini bolo de ninho recheado com Nutella" loading="lazy" width="280" height="280">
             <div class="gallery-overlay"><span class="gallery-caption">Ninho com Nutella</span></div>
         </div>
-        <div class="gallery-item fade-in">
-            <img src="imagens/bolo5-BrigadeircNinhoDois amores.jpeg" alt="Ninho e Brigadeiro (Dois Amores)">
+        <div class="gallery-item fade-in" role="button" tabindex="0" aria-label="Ver imagem ampliada de Ninho e Brigadeiro" data-image="imagens/bolo5-BrigadeircNinhoDois amores.jpeg">
+            <img src="imagens/bolo5-BrigadeircNinhoDois amores.jpeg" alt="Bolo Dois Amores com ninho e brigadeiro" loading="lazy" width="280" height="280">
             <div class="gallery-overlay"><span class="gallery-caption">Ninho e Brigadeiro (Dois Amores)</span></div>
         </div>
-        <div class="gallery-item fade-in">
-            <img src="imagens/bolo6-BrigadeirocMorango(Sensação).jpeg" alt="Bolo com morangos">
+        <div class="gallery-item fade-in" role="button" tabindex="0" aria-label="Ver imagem ampliada de Brigadeiro com Morango" data-image="imagens/bolo6-BrigadeirocMorango(Sensação).jpeg">
+            <img src="imagens/bolo6-BrigadeirocMorango(Sensação).jpeg" alt="Bolo de brigadeiro com geleia de morango" loading="lazy" width="280" height="280">
             <div class="gallery-overlay"><span class="gallery-caption">Brigadeiro C/ Geleia de morango</span></div>
         </div>
-        <div class="gallery-item fade-in">
-            <img src="imagens/bolo7-Ninhocgeleiademorango.jpeg" alt="Ninho C/ Geleia de morango">
+        <div class="gallery-item fade-in" role="button" tabindex="0" aria-label="Ver imagem ampliada de Ninho com Geleia de Morango" data-image="imagens/bolo7-Ninhocgeleiademorango.jpeg">
+            <img src="imagens/bolo7-Ninhocgeleiademorango.jpeg" alt="Mini bolo de ninho com geleia de morango" loading="lazy" width="280" height="280">
             <div class="gallery-overlay"><span class="gallery-caption">Ninho C/ Geleia de morango</span></div>
         </div>
-        <div class="gallery-item fade-in">
-            <img src="imagens/bolo8-Ninho Tradicional.jpeg" alt="Ninho Tradicional">
+        <div class="gallery-item fade-in" role="button" tabindex="0" aria-label="Ver imagem ampliada de Ninho Tradicional" data-image="imagens/bolo8-Ninho Tradicional.jpeg">
+            <img src="imagens/bolo8-Ninho Tradicional.jpeg" alt="Bolo de ninho tradicional" loading="lazy" width="280" height="280">
             <div class="gallery-overlay"><span class="gallery-caption">Ninho Tradicional</span></div>
         </div>
     </div>
 </section>
 
+<!-- ── LIGHTBOX MODAL ── -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualização de imagem ampliada">
+    <button class="lightbox-close" aria-label="Fechar visualização">&times;</button>
+    <div class="lightbox-content">
+        <img src="" alt="" id="lightbox-image">
+        <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+</div>
+
 <!-- ── PEDIDO ── -->
-<section class="pedido-section" id="pedido">
-    <h2 class="section-title fade-in">Monte seu Pedido</h2>
+<section class="pedido-section" id="pedido" aria-labelledby="pedido-title">
+    <h2 class="section-title fade-in" id="pedido-title">Monte seu Pedido</h2>
     <p class="section-subtitle fade-in">Escolha tudo direitinho e envie pelo WhatsApp 💜</p>
 
-    <div class="pedido-box fade-in">
+    <form class="pedido-box fade-in" id="pedido-form" novalidate>
 
-        <label for="tipo">🎂 Tipo do bolo</label>
-        <select id="tipo" onchange="atualizarSabores(); atualizarPreco()">
+        <label for="tipo">🎂 Tipo do bolo <span class="required">*</span></label>
+        <select id="tipo" required aria-required="true" onchange="atualizarSabores(); atualizarPreco()">
             <option value="Mini bolo vulcão">Mini bolo vulcão</option>
             <option value="Bolo tradicional">Bolo tradicional</option>
         </select>
 
-        <label for="massa">🍫 Massa</label>
-        <select id="massa">
+        <label for="massa">🍫 Massa <span class="required">*</span></label>
+        <select id="massa" required aria-required="true">
             <option value="Chocolate">🍫 Chocolate</option>
             <option value="Cenoura">🥕 Cenoura</option>
             <option value="Massa branca">🤍 Massa branca</option>
         </select>
 
-        <label for="sabor">🍬 Sabor / Recheio</label>
-        <select id="sabor" onchange="atualizarPreco()"></select>
+        <label for="sabor">🍬 Sabor / Recheio <span class="required">*</span></label>
+        <select id="sabor" required aria-required="true" onchange="atualizarPreco()"></select>
 
-        <div class="preco-preview">
+        <label for="quantidade">🔢 Quantidade <span class="required">*</span></label>
+        <div class="quantidade-control">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(-1)" aria-label="Diminuir quantidade">−</button>
+            <input type="number" id="quantidade" min="1" max="50" value="1" required aria-required="true" onchange="atualizarPreco()" oninput="atualizarPreco()">
+            <button type="button" class="quantidade-btn" onclick="alterarQuantidade(1)" aria-label="Aumentar quantidade">+</button>
+        </div>
+
+        <div class="preco-preview" role="status" aria-live="polite">
             <span class="preco-label">💰 Valor estimado</span>
             <span class="preco-valor" id="preco-display">R$ 15,00</span>
         </div>
 
-        <label for="nome">👤 Seu nome</label>
-        <input type="text" id="nome" placeholder="Digite seu nome">
+        <label for="nome">👤 Seu nome <span class="required">*</span></label>
+        <input type="text" id="nome" placeholder="Digite seu nome" required aria-required="true" aria-describedby="nome-erro">
+        <span class="error-message" id="nome-erro" role="alert"></span>
+
+        <label for="telefone">📱 Telefone (opcional)</label>
+        <input type="tel" id="telefone" placeholder="(00) 00000-0000" aria-describedby="telefone-erro">
+        <span class="error-message" id="telefone-erro" role="alert"></span>
 
         <label for="obs">📝 Observações</label>
-        <textarea id="obs" placeholder="Ex: retirar hoje, colocar nome no bolo, sem granulado..."></textarea>
+        <textarea id="obs" placeholder="Ex: retirar hoje, colocar nome no bolo, sem granulado..." aria-describedby="obs-hint"></textarea>
+        <small id="obs-hint" class="input-hint">Deixe aqui qualquer informação adicional sobre seu pedido</small>
 
-        <button class="btn-whatsapp" onclick="enviarPedido()">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <button type="submit" class="btn-whatsapp" aria-label="Enviar pedido pelo WhatsApp">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
             <span>Enviar pedido pelo WhatsApp</span>
         </button>
 
-    </div>
+    </form>
 </section>
 
+<!-- ── LOADING SPINNER ── -->
+<div class="loading-overlay" id="loadingOverlay" role="status" aria-live="assertive" aria-label="Processando pedido">
+    <div class="spinner"></div>
+    <p>Preparando seu pedido...</p>
+</div>
+
+<!-- ── TOAST NOTIFICATION ── -->
+<div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
 <!-- ── CONTATO ── -->
-<section class="contact-section">
-    <h2 class="section-title fade-in">Fale Conosco</h2>
+<section class="contact-section" id="contato" aria-labelledby="contato-title">
+    <h2 class="section-title fade-in" id="contato-title">Fale Conosco</h2>
     <p class="section-subtitle fade-in">Estamos aqui para te atender com carinho</p>
     <div class="contact-info">
-        <a href="https://wa.me/5569992295106" class="contact-card fade-in" target="_blank">
-            <div class="contact-icon">📱</div>
+        <a href="https://wa.me/5569992295106" class="contact-card fade-in" target="_blank" rel="noopener noreferrer" aria-label="Entre em contato pelo WhatsApp">
+            <div class="contact-icon" aria-hidden="true">📱</div>
             <h3>WhatsApp</h3>
             <p>Atendimento rápido e carinhoso</p>
             <p class="handle">(69) 99229-5106</p>
         </a>
-        <a href="https://www.instagram.com/delicias_da_jade_?igsh=djJ4a3o1aXYzZjVv" class="contact-card fade-in" target="_blank">
-            <div class="contact-icon">📸</div>
+        <a href="https://www.instagram.com/delicias_da_jade_?igsh=djJ4a3o1aXYzZjVv" class="contact-card fade-in" target="_blank" rel="noopener noreferrer" aria-label="Visite nosso Instagram">
+            <div class="contact-icon" aria-hidden="true">📸</div>
             <h3>Instagram</h3>
             <p>Fotos, novidades e promoções</p>
             <p class="handle">@delicias_da_jade_</p>
@@ -212,11 +313,11 @@
 </section>
 
 <!-- ── FOOTER ── -->
-<footer>
+<footer role="contentinfo">
     <p>&copy; 2026 Delícias da Jade — Todos os direitos reservados</p>
     <p>Feito com 💜 e muito carinho</p>
     <br>
-    <p class="desenvolv">Desenvolvido por um estudante de tecnologia da informação. <a href="https://github.com/henriq-dev?tab=repositories" target="_blank">henriq-dev</a></p>
+    <p class="desenvolv">Desenvolvido por um estudante de tecnologia da informação. <a href="https://github.com/henriq-dev?tab=repositories" target="_blank" rel="noopener noreferrer">henriq-dev</a></p>
 </footer>
 
 <script src="script.js"></script>
