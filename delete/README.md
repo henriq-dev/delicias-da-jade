@@ -1,1 +1,0 @@
-https://henriq-dev.github.io/delicias-da-jade/index.html
