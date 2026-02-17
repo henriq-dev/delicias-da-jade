@@ -1,0 +1,32 @@
+# ═══════════════════════════════════════
+# GitHub Pages — Delícias da Jade
+# ═══════════════════════════════════════
+
+# URL base do site (sem barra no final)
+url: "https://henriq-dev.github.io"
+baseurl: "/delicias-da-jade"
+
+# Informações do site
+title: "Delícias da Jade"
+description: "Bolos artesanais feitos com amor e dedicação em Porto Velho, RO."
+lang: "pt-BR"
+
+# Evita que o Jekyll processe arquivos que não precisa
+exclude:
+  - README.md
+  - otimizar.sh
+  - checklist.html
+  - "*.sh"
+  - .gitattributes
+  - LICENSE
+
+# Não usa tema Jekyll (site é HTML/CSS puro)
+theme: null
+
+# Garante que arquivos com _ no nome sejam servidos corretamente
+include:
+  - _headers
+
+# Compressão e performance
+sass:
+  style: compressed

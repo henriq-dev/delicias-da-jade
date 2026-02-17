@@ -1,461 +1,453 @@
 /* ═══════════════════════════════════════
    Delícias da Jade — Scripts
+   v2.0 — Sistema de Carrinho de Compras
 ═══════════════════════════════════════ */
 
 /* ── CARDÁPIO ── */
 const cardapio = {
     "Mini bolo vulcão": [
-        { nome: "Brigadeiro tradicional", preco: 15 },
-        { nome: "Brigadeiro c/ Ninho", preco: 15 },
-        { nome: "Brigadeiro c/ Geleia de morango", preco: 18 },
-        { nome: "Ninho tradicional", preco: 15 },
-        { nome: "Ninho c/ Oreo", preco: 18 },
-        { nome: "Ninho c/ Nutella", preco: 18 },
-        { nome: "Ninho c/ Geleia de morango", preco: 18 },
+        { nome: "Brigadeiro tradicional",           preco: 15 },
+        { nome: "Brigadeiro c/ Ninho",              preco: 15 },
+        { nome: "Brigadeiro c/ Geleia de morango",  preco: 18 },
+        { nome: "Ninho tradicional",                preco: 15 },
+        { nome: "Ninho c/ Oreo",                    preco: 18 },
+        { nome: "Ninho c/ Nutella",                 preco: 18 },
+        { nome: "Ninho c/ Geleia de morango",       preco: 18 },
     ],
     "Bolo tradicional": [
         { nome: "Brigadeiro tradicional", preco: 36 },
-        { nome: "Brigadeiro c/ Ninho", preco: 45 },
-        { nome: "Ninho tradicional", preco: 40 },
-        { nome: "Maracujá", preco: 42 },
+        { nome: "Brigadeiro c/ Ninho",    preco: 45 },
+        { nome: "Ninho tradicional",      preco: 40 },
+        { nome: "Maracuja",               preco: 42 },
     ]
 };
 
-/* ── NAVBAR STICKY ── */
-window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
+/* ════════════════════════════════════════
+   ESTADO DO CARRINHO
+════════════════════════════════════════ */
+
+// Carrega do localStorage ou começa vazio
+let carrinho = JSON.parse(localStorage.getItem("jade_carrinho") || "[]");
+
+function salvarCarrinho() {
+    localStorage.setItem("jade_carrinho", JSON.stringify(carrinho));
+}
+
+/* ════════════════════════════════════════
+   NAVBAR + SCROLL
+════════════════════════════════════════ */
+
+const backToTopBtn = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+    document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
+    backToTopBtn.classList.toggle("visible", window.scrollY > 300);
 });
 
-/* ── BOTÃO VOLTAR AO TOPO ── */
-const backToTopBtn = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.classList.add('visible');
-    } else {
-        backToTopBtn.classList.remove('visible');
-    }
+backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
+/* ════════════════════════════════════════
+   FORMULARIO — SELECAO DE ITEM
+════════════════════════════════════════ */
 
-/* ── ATUALIZA OPÇÕES DE RECHEIO CONFORME O TIPO ── */
 function atualizarSabores() {
     const tipo = document.getElementById("tipo").value;
-    const sel = document.getElementById("sabor");
+    const sel  = document.getElementById("sabor");
     sel.innerHTML = "";
     cardapio[tipo].forEach(item => {
         const opt = document.createElement("option");
         opt.value = item.nome;
-        opt.textContent = `${item.nome}  —  R$ ${item.preco.toFixed(2).replace(".", ",")}`;
+        opt.textContent = item.nome + "  —  R$ " + item.preco.toFixed(2).replace(".", ",");
         sel.appendChild(opt);
     });
     atualizarPreco();
 }
 
-/* ── ATUALIZA PRÉVIA DE PREÇO ── */
 function atualizarPreco() {
-    const tipo = document.getElementById("tipo").value;
-    const sabor = document.getElementById("sabor").value;
-    const quantidade = parseInt(document.getElementById("quantidade").value) || 1;
-
-    const item = cardapio[tipo].find(i => i.nome === sabor);
-    const precoUnitario = item ? item.preco : 0;
-
-    const total = precoUnitario * quantidade;
-
+    const tipo      = document.getElementById("tipo").value;
+    const sabor     = document.getElementById("sabor").value;
+    const qtd       = parseInt(document.getElementById("quantidade").value) || 1;
+    const item      = cardapio[tipo].find(i => i.nome === sabor);
+    const total     = item ? item.preco * qtd : 0;
     document.getElementById("preco-display").textContent =
         "R$ " + total.toFixed(2).replace(".", ",");
 }
 
-/* ── CONTROLE DE QUANTIDADE ── */
 function alterarQuantidade(delta) {
     const input = document.getElementById("quantidade");
-    let valor = parseInt(input.value) || 1;
-    valor += delta;
-    
-    // Limita entre 1 e 50
-    if (valor < 1) valor = 1;
-    if (valor > 50) valor = 50;
-    
-    input.value = valor;
+    let v = (parseInt(input.value) || 1) + delta;
+    if (v < 1)  v = 1;
+    if (v > 50) v = 50;
+    input.value = v;
     atualizarPreco();
 }
 
-/* ── MÁSCARA DE TELEFONE ── */
-const telefoneInput = document.getElementById("telefone");
-if (telefoneInput) {
-    telefoneInput.addEventListener("input", (e) => {
-        let value = e.target.value.replace(/\D/g, "");
-        
-        if (value.length <= 11) {
-            if (value.length <= 2) {
-                value = value.replace(/(\d{0,2})/, "($1");
-            } else if (value.length <= 7) {
-                value = value.replace(/(\d{2})(\d{0,5})/, "($1) $2");
-            } else {
-                value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
-            }
-        }
-        
-        e.target.value = value;
+document.getElementById("quantidade").addEventListener("input", function () {
+    let v = parseInt(this.value);
+    if (isNaN(v) || v < 1) this.value = 1;
+    else if (v > 50)        this.value = 50;
+    atualizarPreco();
+});
+
+/* ════════════════════════════════════════
+   MASCARA DE TELEFONE
+════════════════════════════════════════ */
+
+function aplicarMascaraTelefone(input) {
+    input.addEventListener("input", function (e) {
+        let v = e.target.value.replace(/\D/g, "");
+        if (v.length <= 2)       v = v.replace(/(\d{0,2})/, "($1");
+        else if (v.length <= 7)  v = v.replace(/(\d{2})(\d{0,5})/, "($1) $2");
+        else                     v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+        e.target.value = v;
     });
 }
 
-/* ── VALIDAÇÕES ── */
+const telFormInput  = document.getElementById("telefone");
+const telFinalInput = document.getElementById("telefone-final");
+if (telFormInput)  aplicarMascaraTelefone(telFormInput);
+if (telFinalInput) aplicarMascaraTelefone(telFinalInput);
+
+/* ════════════════════════════════════════
+   VALIDACOES
+════════════════════════════════════════ */
+
 function validarNome(nome) {
-    if (!nome || nome.trim().length < 2) {
-        return "Por favor, informe seu nome completo";
-    }
-    return null;
+    return (!nome || nome.trim().length < 2)
+        ? "Por favor, informe seu nome completo"
+        : null;
 }
 
-function validarTelefone(telefone) {
-    if (!telefone) return null; // Telefone é opcional
-    
-    const numeroLimpo = telefone.replace(/\D/g, "");
-    if (numeroLimpo.length > 0 && numeroLimpo.length < 10) {
-        return "Telefone inválido. Use o formato (00) 00000-0000";
-    }
-    return null;
+function validarTelefone(tel) {
+    if (!tel) return null;
+    const limpo = tel.replace(/\D/g, "");
+    return (limpo.length > 0 && limpo.length < 10)
+        ? "Telefone invalido. Use o formato (00) 00000-0000"
+        : null;
 }
 
-function mostrarErro(campo, mensagem) {
-    const input = document.getElementById(campo);
-    const erroSpan = document.getElementById(`${campo}-erro`);
-    
+function mostrarErro(campoId, mensagem) {
+    const input = document.getElementById(campoId);
+    const span  = document.getElementById(campoId + "-erro");
+    if (!input) return;
     if (mensagem) {
         input.classList.add("error");
-        if (erroSpan) {
-            erroSpan.textContent = mensagem;
-            erroSpan.classList.add("show");
-        }
-        return false;
+        if (span) { span.textContent = mensagem; span.classList.add("show"); }
     } else {
         input.classList.remove("error");
-        if (erroSpan) {
-            erroSpan.textContent = "";
-            erroSpan.classList.remove("show");
-        }
-        return true;
+        if (span) { span.textContent = ""; span.classList.remove("show"); }
     }
 }
 
-/* ── TOAST NOTIFICATION ── */
-function mostrarToast(mensagem, tipo = "success") {
+const nomeInput = document.getElementById("nome-final");
+if (nomeInput) {
+    nomeInput.addEventListener("blur", function () {
+        mostrarErro("nome-final", validarNome(this.value));
+    });
+}
+
+/* ════════════════════════════════════════
+   TOAST & LOADING
+════════════════════════════════════════ */
+
+function mostrarToast(mensagem, tipo) {
+    tipo = tipo || "success";
     const toast = document.getElementById("toast");
     toast.textContent = mensagem;
-    toast.className = `toast ${tipo}`;
-    
-    // Mostra o toast
-    setTimeout(() => toast.classList.add("show"), 100);
-    
-    // Esconde após 3 segundos
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 3000);
+    toast.className = "toast " + tipo;
+    setTimeout(function () { toast.classList.add("show"); }, 50);
+    setTimeout(function () { toast.classList.remove("show"); }, 3200);
 }
 
-/* ── LOADING OVERLAY ── */
-function mostrarLoading(show = true) {
-    const loadingOverlay = document.getElementById("loadingOverlay");
-    if (show) {
-        loadingOverlay.classList.add("active");
-    } else {
-        loadingOverlay.classList.remove("active");
-    }
+function mostrarLoading(show) {
+    document.getElementById("loadingOverlay").classList.toggle("active", !!show);
 }
 
-/* ── ENVIAR PEDIDO PELO WHATSAPP ── */
-function enviarPedido(event) {
-    if (event) event.preventDefault();
-    
-    // Limpa erros anteriores
-    mostrarErro("nome", null);
-    mostrarErro("telefone", null);
-    
-    // Coleta dados
-    const tipo = document.getElementById("tipo").value;
-    const massa = document.getElementById("massa").value;
-    const sabor = document.getElementById("sabor").value;
-    const quantidade = document.getElementById("quantidade").value;
-    const nome = document.getElementById("nome").value.trim();
-    const telefone = document.getElementById("telefone").value.trim();
-    const obs = document.getElementById("obs").value.trim();
-    const preco = document.getElementById("preco-display").textContent;
-    
-    // Validações
-    let temErro = false;
-    
-    const erroNome = validarNome(nome);
-    if (erroNome) {
-        mostrarErro("nome", erroNome);
-        temErro = true;
-    }
-    
-    const erroTelefone = validarTelefone(telefone);
-    if (erroTelefone) {
-        mostrarErro("telefone", erroTelefone);
-        temErro = true;
-    }
-    
-    if (temErro) {
-        mostrarToast("Por favor, corrija os erros no formulário", "error");
-        // Foca no primeiro campo com erro
-        const primeiroErro = document.querySelector(".error");
-        if (primeiroErro) primeiroErro.focus();
+/* ════════════════════════════════════════
+   RENDERIZACAO DO CARRINHO
+════════════════════════════════════════ */
+
+function renderizarCarrinho() {
+    const wrapper = document.getElementById("carrinho-wrapper");
+    const lista   = document.getElementById("carrinho-lista");
+    const totalEl = document.getElementById("carrinho-total-valor");
+
+    lista.innerHTML = "";
+
+    if (carrinho.length === 0) {
+        wrapper.classList.remove("visivel");
         return;
     }
-    
-    // Mostra loading
+
+    wrapper.classList.add("visivel");
+
+    var totalGeral = 0;
+
+    carrinho.forEach(function (item, idx) {
+        var subtotal = item.preco * item.quantidade;
+        totalGeral += subtotal;
+
+        var li = document.createElement("li");
+        li.className = "carrinho-item";
+        li.setAttribute("role", "listitem");
+        li.innerHTML =
+            '<div class="carrinho-item-info">' +
+                '<div class="carrinho-item-titulo">' + item.tipo + '</div>' +
+                '<div class="carrinho-item-detalhe">' +
+                    item.massa + ' \u00b7 ' + item.sabor + ' \u00b7 ' + item.quantidade + 'x' +
+                '</div>' +
+            '</div>' +
+            '<div class="carrinho-item-preco">R$ ' + subtotal.toFixed(2).replace(".", ",") + '</div>' +
+            '<button class="btn-remover-item" onclick="removerItem(' + idx + ')" ' +
+                'aria-label="Remover ' + item.sabor + ' do carrinho" title="Remover">\u00d7</button>';
+
+        lista.appendChild(li);
+    });
+
+    totalEl.textContent = "R$ " + totalGeral.toFixed(2).replace(".", ",");
+
+    if (carrinho.length === 1) {
+        wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+}
+
+/* ════════════════════════════════════════
+   ADICIONAR AO CARRINHO
+════════════════════════════════════════ */
+
+document.getElementById("pedido-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var tipo      = document.getElementById("tipo").value;
+    var massa     = document.getElementById("massa").value;
+    var sabor     = document.getElementById("sabor").value;
+    var qtd       = parseInt(document.getElementById("quantidade").value) || 1;
+    var itemRef   = cardapio[tipo].find(function (i) { return i.nome === sabor; });
+
+    if (!itemRef) return;
+
+    // Se ja existe item identico -> atualiza quantidade
+    var existente = carrinho.find(function (c) {
+        return c.tipo === tipo && c.massa === massa && c.sabor === sabor;
+    });
+
+    if (existente) {
+        existente.quantidade = Math.min(existente.quantidade + qtd, 50);
+        mostrarToast('Quantidade de "' + sabor + '" atualizada!');
+    } else {
+        carrinho.push({ tipo: tipo, massa: massa, sabor: sabor, quantidade: qtd, preco: itemRef.preco });
+        mostrarToast('"' + sabor + '" adicionado ao carrinho!');
+    }
+
+    salvarCarrinho();
+    renderizarCarrinho();
+
+    // Animacao no botao
+    var btn = document.querySelector(".btn-adicionar");
+    btn.classList.add("added");
+    btn.addEventListener("animationend", function () { btn.classList.remove("added"); }, { once: true });
+
+    // Reseta quantidade
+    document.getElementById("quantidade").value = 1;
+    atualizarPreco();
+});
+
+/* ════════════════════════════════════════
+   REMOVER ITEM
+════════════════════════════════════════ */
+
+function removerItem(idx) {
+    var nome = carrinho[idx] ? carrinho[idx].sabor : "Item";
+    carrinho.splice(idx, 1);
+    salvarCarrinho();
+    renderizarCarrinho();
+    mostrarToast('"' + nome + '" removido do carrinho.', "error");
+}
+
+/* ════════════════════════════════════════
+   LIMPAR CARRINHO
+════════════════════════════════════════ */
+
+function limparCarrinho() {
+    if (carrinho.length === 0) return;
+    if (!confirm("Deseja realmente limpar todo o carrinho?")) return;
+    carrinho = [];
+    salvarCarrinho();
+    renderizarCarrinho();
+    mostrarToast("Carrinho limpo.", "error");
+}
+
+/* ════════════════════════════════════════
+   FINALIZAR PEDIDO — WHATSAPP
+════════════════════════════════════════ */
+
+function finalizarPedido() {
+    if (carrinho.length === 0) {
+        mostrarToast("Adicione pelo menos um item ao carrinho!", "error");
+        return;
+    }
+
+    var nome     = document.getElementById("nome-final").value.trim();
+    var telefone = document.getElementById("telefone-final").value.trim();
+    var obs      = document.getElementById("obs-final").value.trim();
+
+    mostrarErro("nome-final", null);
+
+    var erroNome = validarNome(nome);
+    if (erroNome) {
+        mostrarErro("nome-final", erroNome);
+        mostrarToast("Por favor, informe seu nome.", "error");
+        document.getElementById("nome-final").focus();
+        return;
+    }
+
+    var erroTel = validarTelefone(telefone);
+    if (erroTel) {
+        mostrarToast(erroTel, "error");
+        document.getElementById("telefone-final").focus();
+        return;
+    }
+
     mostrarLoading(true);
-    
-    // Monta mensagem (sem emojis para melhor compatibilidade com WhatsApp)
-    const mensagem = `Olá! Vim pelo site da Delícias da Jade
 
-*Pedido:*
-Tipo: ${tipo}
-Massa: ${massa}
-Recheio: ${sabor}
-Quantidade: ${quantidade}
-Valor: ${preco}
+    // Monta lista de itens
+    var totalGeral = 0;
+    var listaItens = "";
 
-Nome: ${nome}${telefone ? `
-Telefone: ${telefone}` : ''}
-Obs: ${obs || "Nenhuma"}
+    carrinho.forEach(function (item, idx) {
+        var subtotal = item.preco * item.quantidade;
+        totalGeral += subtotal;
+        listaItens +=
+            "\n*Item " + (idx + 1) + ":* " + item.tipo +
+            "\n   Massa: " + item.massa +
+            "\n   Recheio: " + item.sabor +
+            "\n   Qtd: " + item.quantidade + "x  |  R$ " + subtotal.toFixed(2).replace(".", ",");
+    });
 
-Gostaria de confirmar disponibilidade!`;
+    var mensagem =
+        "Ola! Vim pelo site da Delicias da Jade \uD83C\uDF70\n\n" +
+        "*\uD83D\uDCCB MEU PEDIDO:*\n" +
+        "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501" +
+        listaItens + "\n\n" +
+        "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n" +
+        "\uD83D\uDCB0 *Total: R$ " + totalGeral.toFixed(2).replace(".", ",") + "*\n" +
+        "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n" +
+        "\uD83D\uDC64 *Nome:* " + nome +
+        (telefone ? "\n\uD83D\uDCF1 *Telefone:* " + telefone : "") +
+        (obs ? "\n\uD83D\uDCDD *Obs:* " + obs : "") +
+        "\n\nGostaria de confirmar disponibilidade! \uD83D\uDC9C";
 
-    // Simula delay de processamento (opcional)
-    setTimeout(() => {
+    setTimeout(function () {
         mostrarLoading(false);
-        mostrarToast("Redirecionando para WhatsApp...", "success");
-        
-        // Abre WhatsApp após 500ms
-        setTimeout(() => {
-            const url = `https://wa.me/5569992295106?text=${encodeURIComponent(mensagem)}`;
+        mostrarToast("Redirecionando para o WhatsApp...");
+        setTimeout(function () {
+            var url = "https://wa.me/5569992295106?text=" + encodeURIComponent(mensagem);
             window.open(url, "_blank");
         }, 500);
     }, 800);
 }
 
-// Adiciona listener ao formulário
-document.getElementById("pedido-form").addEventListener("submit", enviarPedido);
+/* ════════════════════════════════════════
+   LIGHTBOX DA GALERIA
+════════════════════════════════════════ */
 
-/* ── LIGHTBOX GALERIA ── */
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightbox-image");
-const lightboxCaption = document.getElementById("lightbox-caption");
-const lightboxClose = document.querySelector(".lightbox-close");
+var lightbox      = document.getElementById("lightbox");
+var lightboxImage = document.getElementById("lightbox-image");
+var lightboxCap   = document.getElementById("lightbox-caption");
+var lightboxClose = document.querySelector(".lightbox-close");
 
-// Abre lightbox ao clicar em imagem da galeria
-document.querySelectorAll(".gallery-item").forEach(item => {
-    const abrirLightbox = () => {
-        const imageSrc = item.querySelector("img").src;
-        const imageAlt = item.querySelector("img").alt;
-        const caption = item.querySelector(".gallery-caption").textContent;
-        
-        lightboxImage.src = imageSrc;
-        lightboxImage.alt = imageAlt;
-        lightboxCaption.textContent = caption;
+document.querySelectorAll(".gallery-item").forEach(function (item) {
+    function abrir() {
+        lightboxImage.src = item.querySelector("img").src;
+        lightboxImage.alt = item.querySelector("img").alt;
+        lightboxCap.textContent = item.querySelector(".gallery-caption").textContent;
         lightbox.classList.add("active");
-        
-        // Previne scroll da página
         document.body.style.overflow = "hidden";
-    };
-    
-    // Click
-    item.addEventListener("click", abrirLightbox);
-    
-    // Enter key para acessibilidade
-    item.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            abrirLightbox();
-        }
+    }
+    item.addEventListener("click", abrir);
+    item.addEventListener("keypress", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(); }
     });
 });
 
-// Fecha lightbox
-const fecharLightbox = () => {
+function fecharLightbox() {
     lightbox.classList.remove("active");
     document.body.style.overflow = "";
-};
-
+}
 lightboxClose.addEventListener("click", fecharLightbox);
-
-// Fecha ao clicar fora da imagem
-lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-        fecharLightbox();
-    }
+lightbox.addEventListener("click", function (e) { if (e.target === lightbox) fecharLightbox(); });
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && lightbox.classList.contains("active")) fecharLightbox();
 });
 
-// Fecha com tecla ESC
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightbox.classList.contains("active")) {
-        fecharLightbox();
-    }
-});
-
-/* ── ANIMAÇÕES DE SCROLL (FADE-IN) ── */
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { 
-        if (e.isIntersecting) {
-            e.target.classList.add("visible");
-        }
-    });
-}, { 
-    threshold: 0.1, 
-    rootMargin: "0px 0px -40px 0px" 
-});
-
-document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-
-/* ── SMOOTH SCROLL PARA ÂNCORAS ── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener("click", e => {
-        e.preventDefault();
-        const targetId = a.getAttribute("href");
-        
-        if (targetId === "#") {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            return;
-        }
-        
-        const target = document.querySelector(targetId);
-        if (target) {
-            const navbarHeight = document.getElementById("navbar").offsetHeight;
-            const targetPosition = target.offsetTop - navbarHeight - 20;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: "smooth"
-            });
-        }
-    });
-});
-
-/* ── VALIDAÇÃO EM TEMPO REAL ── */
-document.getElementById("nome").addEventListener("blur", function() {
-    const erro = validarNome(this.value);
-    mostrarErro("nome", erro);
-});
-
-if (telefoneInput) {
-    telefoneInput.addEventListener("blur", function() {
-        const erro = validarTelefone(this.value);
-        mostrarErro("telefone", erro);
+function trapFocus(el) {
+    var focusables = el.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    var first = focusables[0], last = focusables[focusables.length - 1];
+    el.addEventListener("keydown", function (e) {
+        if (e.key !== "Tab") return;
+        if (e.shiftKey) { if (document.activeElement === first) { last.focus(); e.preventDefault(); } }
+        else            { if (document.activeElement === last)  { first.focus(); e.preventDefault(); } }
     });
 }
-
-/* ── PREVENÇÃO DE VALORES INVÁLIDOS NA QUANTIDADE ── */
-document.getElementById("quantidade").addEventListener("input", function() {
-    let valor = parseInt(this.value);
-    
-    if (isNaN(valor) || valor < 1) {
-        this.value = 1;
-    } else if (valor > 50) {
-        this.value = 50;
-    }
-    
-    atualizarPreco();
+lightbox.addEventListener("transitionend", function () {
+    if (lightbox.classList.contains("active")) { lightboxClose.focus(); trapFocus(lightbox); }
 });
 
-/* ── LAZY LOADING DE IMAGENS (fallback para navegadores antigos) ── */
-if ('loading' in HTMLImageElement.prototype) {
-    // Navegador suporta lazy loading nativo
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-        img.src = img.src;
+/* ════════════════════════════════════════
+   ANIMACOES DE SCROLL (FADE-IN)
+════════════════════════════════════════ */
+
+var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+
+document.querySelectorAll(".fade-in").forEach(function (el) { observer.observe(el); });
+
+/* ════════════════════════════════════════
+   SMOOTH SCROLL
+════════════════════════════════════════ */
+
+document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+        e.preventDefault();
+        var id = a.getAttribute("href");
+        if (id === "#") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+        var alvo = document.querySelector(id);
+        if (alvo) {
+            var offset = document.getElementById("navbar").offsetHeight + 20;
+            window.scrollTo({ top: alvo.offsetTop - offset, behavior: "smooth" });
+        }
     });
-} else {
-    // Fallback para navegadores antigos
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
+});
+
+/* ════════════════════════════════════════
+   LAZY LOADING FALLBACK
+════════════════════════════════════════ */
+
+if (!("loading" in HTMLImageElement.prototype)) {
+    var imgObs = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-                const img = entry.target;
+                var img = entry.target;
                 img.src = img.dataset.src || img.src;
-                img.classList.add('loaded');
-                imageObserver.unobserve(img);
+                obs.unobserve(img);
             }
         });
     });
-    
-    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        imageObserver.observe(img);
-    });
+    document.querySelectorAll('img[loading="lazy"]').forEach(function (img) { imgObs.observe(img); });
 }
 
-/* ── ANALYTICS DE PERFORMANCE (opcional) ── */
-// Registra quando a página está completamente carregada
-window.addEventListener('load', () => {
-    // Performance timing
-    if (window.performance && window.performance.timing) {
-        const perfData = window.performance.timing;
-        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-        console.log(`⚡ Página carregada em ${pageLoadTime}ms`);
-    }
-});
+/* ════════════════════════════════════════
+   INICIALIZACAO
+════════════════════════════════════════ */
 
-/* ── INICIALIZAÇÃO ── */
-document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa sabores
+document.addEventListener("DOMContentLoaded", function () {
     atualizarSabores();
-    
-    // Log de boas-vindas
-    console.log('%c🍰 Delícias da Jade', 'color: #8b5a9e; font-size: 24px; font-weight: bold;');
-    console.log('%cSite desenvolvido com amor e dedicação 💜', 'color: #c8a2d0; font-size: 14px;');
-    console.log('%cDesenvolvido por: henriq-dev', 'color: #666; font-size: 12px;');
-});
-
-/* ── SERVICE WORKER (PWA - opcional) ── */
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // Descomente a linha abaixo quando tiver um service worker configurado
-        // navigator.serviceWorker.register('/sw.js');
-    });
-}
-
-/* ── ACESSIBILIDADE: Trap focus no lightbox ── */
-function trapFocus(element) {
-    const focusableElements = element.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    const firstFocusable = focusableElements[0];
-    const lastFocusable = focusableElements[focusableElements.length - 1];
-
-    element.addEventListener('keydown', (e) => {
-        if (e.key !== 'Tab') return;
-
-        if (e.shiftKey) {
-            if (document.activeElement === firstFocusable) {
-                lastFocusable.focus();
-                e.preventDefault();
-            }
-        } else {
-            if (document.activeElement === lastFocusable) {
-                firstFocusable.focus();
-                e.preventDefault();
-            }
-        }
-    });
-}
-
-// Aplica trap focus quando lightbox abre
-lightbox.addEventListener('transitionend', () => {
-    if (lightbox.classList.contains('active')) {
-        lightboxClose.focus();
-        trapFocus(lightbox);
-    }
+    renderizarCarrinho();  // Restaura carrinho salvo no localStorage
+    console.log("%c Delicias da Jade", "color:#8b5a9e;font-size:22px;font-weight:bold;");
+    console.log("%cCarrinho v2.0 — feito com amor", "color:#c8a2d0;font-size:13px;");
 });
